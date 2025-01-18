@@ -14,11 +14,11 @@ namespace containers {
     }
     class Client
     {
-        private string ID;
-        private string Name;
-        private ClientType Type;
-        private string Address;
-        private string Phone;
+        public  string ID { get; private set; }
+        public  string Name { get; private set; }
+        public  ClientType Type { get; private set; }
+        public  string Address { get; private set; }
+        public  string Phone { get; private set; }
 
         public Client(string id, string name, ClientType type, string address, string phone)
         {
@@ -35,6 +35,26 @@ namespace containers {
             Name = name;
             Type = type;
             Address = address;
+            Phone = phone;
+        }
+
+        public void SetName(string name)
+        {
+            Name = name;
+        }
+
+        public void SetType(ClientType type)
+        {
+            Type = type;
+        }
+
+        public void SetAddress(string address)
+        {
+            Address = address;
+        }
+
+        public void SetPhone(string phone)
+        {
             Phone = phone;
         }
     }

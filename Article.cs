@@ -22,12 +22,12 @@ namespace containers {
 
     class Article
     {
-        private string ID;
-        private string Description;
-        private float Weight;
-        private UnitType Unit;
-        private uint Quantity;
-        private QuantityType QuantityType;
+        public string ID { get; private set; }
+        public string Description { get; private set; }
+        public float Weight { get; private set; }
+        public UnitType Unit { get; private set; }
+        public uint Quantity { get; private set; }
+        public QuantityType QuantityType { get; private set; }
 
         public Article(string id, string description, float weight, UnitType unit, uint quantity, QuantityType quantityType)
         {
@@ -46,6 +46,31 @@ namespace containers {
             Weight = weight;
             Unit = unit;
             Quantity = quantity;
+            QuantityType = quantityType;
+        }
+
+        public void SetDescription(string description)
+        {
+            Description = description;
+        }
+
+        public void SetWeight(float weight)
+        {
+            Weight = weight;
+        }
+
+        public void SetUnit(UnitType unit)
+        {
+            Unit = unit;
+        }
+
+        public void SetQuantity(uint quantity)
+        {
+            Quantity = quantity;
+        }
+
+        public void SetQuantityType(QuantityType quantityType)
+        {
             QuantityType = quantityType;
         }
     }

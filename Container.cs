@@ -33,15 +33,15 @@ namespace containers {
 
     class Container
     {
-        private string Code;
-        private ContainerType Type;
-        private ContainerState State;
-        private float Capacity;
-        private float Tare;
+        public string ID { get; private set; }
+        public ContainerType Type { get; private set; }
+        public ContainerState State { get; private set; }
+        public float Capacity { get; private set; }
+        public float Tare { get; private set; }
 
-        public Container(string code, ContainerType type, ContainerState state, float capacity, float tare)
+        public Container(string id, ContainerType type, ContainerState state, float capacity, float tare)
         {
-            Code = code;
+            ID = id;
             Type = type;
             State = state;
             Capacity = capacity;
@@ -49,13 +49,27 @@ namespace containers {
         }
 
         public Container(ContainerType type, ContainerState state, float capacity, float tare) {
-            Code = Utils.GenerateID();
+            ID = Utils.GenerateID();
             Type = type;
             State = state;
             Capacity = capacity;
             Tare = tare;
         }
+        
+        public void SetType(ContainerType type) {
+            Type = type;
+        }
 
+        public void SetState(ContainerState state) {
+            State = state;
+        }
 
+        public void SetCapacity(float capacity) {
+            Capacity = capacity;
+        }
+
+        public void SetTare(float tare) {
+            Tare = tare;
+        }
     }
 }
