@@ -47,9 +47,9 @@ de zapatos").
 - Unidad Medida de Cantidad: medida del peso (ej. kg, lb).
 - Valor Unitario: valor unitario del artículo ($).
 ### Gestionar la propiedad de la mercancía dentro de los contenedores
-- **Permitir que los clientes sean propietarios de los artículos dentro de los contenedores.**
+- **Permitir que los clientes sean propietarios de los artículos dentro de los contenedores.** (DONE)
 ### Gestionar el inventario detallado dentro de cada contenedor
-- **Registrar los artículos específicos que contiene cada contenedor.**
+- **Registrar los artículos específicos que contiene cada contenedor.** (DONE)
 ### Realizar consultas eficientes (Container Search Engine)
 **Permitir consultar la información de los contenedores, los clientes y los artículos:**
 - Obtener un listado de los clientes que tienen mercancía en un contenedor 
