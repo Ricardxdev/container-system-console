@@ -2,7 +2,7 @@ namespace containers {
     class ArticleNode: Article {
         public ArticleNode? Next { get; private set; }
 
-        public ArticleNode(Article article) : base(article.ID, article.Description, article.Weight, article.Unit, article.Quantity, article.QuantityType) {
+        public ArticleNode(Article article) : base(article.ID, article.Description, article.Weight, article.Unit, article.Quantity, article.QuantityType, article.UnitPrice) {
           
         }
 
@@ -21,6 +21,9 @@ namespace containers {
         }
 
         public void Add(Article article) {
+            if (Find(article.ID) != null) {
+                return;
+            }
             ArticleNode newNode = new ArticleNode(article);
             if (head == null) {
                 head = newNode;
@@ -51,6 +54,7 @@ namespace containers {
                     current.SetUnit(article.Unit);
                     current.SetQuantity(article.Quantity);
                     current.SetQuantityType(article.QuantityType);
+                    current.SetUnitPrice(article.UnitPrice);
                     break;
                 }
                 current = current.Next;
@@ -73,6 +77,14 @@ namespace containers {
                     break;
                 }
                 previous = current;
+                current = current.Next;
+            }
+        }
+
+        public void ForEach(Action<ArticleNode> action) {
+            ArticleNode? current = head;
+            while (current != null) {
+                action(current);
                 current = current.Next;
             }
         }

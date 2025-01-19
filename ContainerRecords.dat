@@ -1,4 +1,4 @@
-"Código Contenedor"|"Tipo"|"Estado"|"Peso"|"Máximo (kg)"|"Tara (kg)"
-"ABC12345"|"20 pies"|"En tránsito"|"24000"|"2300"
-"WXY55544"|"Reefer"|"Entregado"|"28000"|"4200"
-"XYZ98765"|"40 pies HC"|"En puerto"|"30480"|"3750"
+'Código Contenedor'|'Tipo'|'Estado'|'Peso Máximo (kg)'|'Tara (kg)'
+'ABC12345'|'20 pies'|'En tránsito'|'24000'|'2300'
+'WXY55544'|'Reefer'|'Entregado'|'28000'|'4200'
+'XYZ98765'|'40 pies HC'|'En puerto'|'30480'|'3750'

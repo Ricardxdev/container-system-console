@@ -1,9 +1,14 @@
 namespace containers {
     class ClientNode: Client {
         public ClientNode? Next { get; private set; }
+        public ArticleList Articles { get; private set; }
 
         public ClientNode(Client client) : base(client.ID, client.Name, client.Type, client.Address, client.Phone) {
-            
+            Articles = new ArticleList();
+        }
+
+        public ClientNode(Client client, ArticleList articles) : base(client.ID, client.Name, client.Type, client.Address, client.Phone) {
+            Articles = articles;
         }
 
         public void SetNext(ClientNode? next) {
@@ -21,6 +26,9 @@ namespace containers {
         }
 
         public void Add(Client client) {
+            if (Find(client.ID) != null) {
+                return;
+            }
             ClientNode newNode = new ClientNode(client);
             if (head == null) {
                 head = newNode;
@@ -72,6 +80,14 @@ namespace containers {
                     break;
                 }
                 previous = current;
+                current = current.Next;
+            }
+        }
+
+        public void ForEach(Action<ClientNode> action) {
+            ClientNode? current = head;
+            while (current != null) {
+                action(current);
                 current = current.Next;
             }
         }

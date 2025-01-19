@@ -1,9 +1,14 @@
 namespace containers {
     class ContainerNode: Container {
         public ContainerNode? Next { get; private set; }
+        public ClientList Clients { get; private set; }
 
-        public ContainerNode(Container container) : base(container.ID, container.Type, container.State, container.Capacity, container.Tare) {
-            
+        public ContainerNode(Container container) : base(container.ID, container.Types, container.State, container.Capacity, container.Tare) {
+            Clients = new ClientList();
+        }
+
+        public ContainerNode(Container container, ClientList clients) : base(container.ID, container.Types, container.State, container.Capacity, container.Tare) {
+            Clients = clients;
         }
 
         public void SetNext(ContainerNode? next) {
@@ -21,6 +26,9 @@ namespace containers {
         }
 
         public void Add(Container container) {
+            if (Find(container.ID) != null) {
+                return;
+            }
             ContainerNode newNode = new ContainerNode(container);
             if (head == null) {
                 head = newNode;
@@ -46,7 +54,7 @@ namespace containers {
             ContainerNode? current = head;
             while (current != null) {
                 if (current.ID == container.ID) {
-                    current.SetType(container.Type);
+                    current.SetTypes(container.Types);
                     current.SetState(container.State);
                     current.SetCapacity(container.Capacity);
                     current.SetTare(container.Tare);
@@ -72,6 +80,14 @@ namespace containers {
                     break;
                 }
                 previous = current;
+                current = current.Next;
+            }
+        }
+
+        public void ForEach(Action<ContainerNode> action) {
+            ContainerNode? current = head;
+            while (current != null) {
+                action(current);
                 current = current.Next;
             }
         }

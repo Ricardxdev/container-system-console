@@ -34,30 +34,34 @@ namespace containers {
     class Container
     {
         public string ID { get; private set; }
-        public ContainerType Type { get; private set; }
+        public ContainerType[] Types { get; private set; }
         public ContainerState State { get; private set; }
         public float Capacity { get; private set; }
         public float Tare { get; private set; }
 
-        public Container(string id, ContainerType type, ContainerState state, float capacity, float tare)
+        public Container(string id, ContainerType[] types, ContainerState state, float capacity, float tare)
         {
             ID = id;
-            Type = type;
+            Types = types;
             State = state;
             Capacity = capacity;
             Tare = tare;
         }
 
-        public Container(ContainerType type, ContainerState state, float capacity, float tare) {
+        public Container(ContainerType[] types, ContainerState state, float capacity, float tare) {
             ID = Utils.GenerateID();
-            Type = type;
+            Types = types;
             State = state;
             Capacity = capacity;
             Tare = tare;
         }
         
-        public void SetType(ContainerType type) {
-            Type = type;
+        public void Print() {
+            Console.WriteLine($"ID: {ID} - State: {State} - Capacity: {Capacity}");
+        }
+
+        public void SetTypes(ContainerType[] types) {
+            Types = types;
         }
 
         public void SetState(ContainerState state) {

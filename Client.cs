@@ -38,6 +38,10 @@ namespace containers {
             Phone = phone;
         }
 
+        public void Print() {
+            Console.WriteLine($"ID: {ID} - Name: {Name} - Type: {Type}");
+        }
+
         public void SetName(string name)
         {
             Name = name;

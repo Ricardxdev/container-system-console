@@ -28,8 +28,9 @@ namespace containers {
         public UnitType Unit { get; private set; }
         public uint Quantity { get; private set; }
         public QuantityType QuantityType { get; private set; }
+        public float UnitPrice { get; private set; }
 
-        public Article(string id, string description, float weight, UnitType unit, uint quantity, QuantityType quantityType)
+        public Article(string id, string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice)
         {
             ID = id;
             Description = description;
@@ -37,9 +38,10 @@ namespace containers {
             Unit = unit;
             Quantity = quantity;
             QuantityType = quantityType;
+            UnitPrice = unitPrice;
         }
 
-        public Article(string description, float weight, UnitType unit, uint quantity, QuantityType quantityType)
+        public Article(string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice)
         {
             ID = Utils.GenerateID();
             Description = description;
@@ -47,6 +49,11 @@ namespace containers {
             Unit = unit;
             Quantity = quantity;
             QuantityType = quantityType;
+            UnitPrice = unitPrice;
+        }
+
+        public void Print() {
+            Console.WriteLine($"ID: {ID} - Description: {Description} - Quantity: {Quantity}");
         }
 
         public void SetDescription(string description)
@@ -72,6 +79,11 @@ namespace containers {
         public void SetQuantityType(QuantityType quantityType)
         {
             QuantityType = quantityType;
+        }
+
+        public void SetUnitPrice(float unitPrice)
+        {
+            UnitPrice = unitPrice;
         }
     }
 }
