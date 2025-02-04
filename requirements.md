@@ -52,14 +52,14 @@ de zapatos").
 - **Registrar los artículos específicos que contiene cada contenedor.** (DONE)
 ### Realizar consultas eficientes (Container Search Engine)
 **Permitir consultar la información de los contenedores, los clientes y los artículos:**
-- Obtener un listado de los clientes que tienen mercancía en un contenedor 
-específico. (DONE)
-- Obtener un listado de los artículos contenidos en un contenedor específico. (DONE)
-- Obtener un listado de los contenedores que contienen un artículo específico. (DONE)
 - Obtener el historial de contenedores que se han manejado con un cliente. (DONE)
 - Obtener un listado de contenedores con su contenido y propietarios.
-- Obtener un listado de clientes con los contenedores que utilizan.
 - Obtener un listado de los contenedores según un estado especifico. (DONE)
 - Obtener un listado de los contenedores vacíos. (DONE)
 - Obtener un listado de los contenedores en mantenimiento. (DONE)
+- Obtener un listado de los contenedores que contienen un artículo específico. (DONE)
+- Obtener un listado de los clientes que tienen mercancía en un contenedor 
+específico. (DONE)
+- Obtener un listado de clientes con los contenedores que utilizan.
+- Obtener un listado de los artículos contenidos en un contenedor específico. (DONE)
 - Obtener el valor total de la mercancía dado un contenedor. (DONE)

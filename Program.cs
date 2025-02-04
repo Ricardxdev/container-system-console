@@ -1,40 +1,49 @@
-﻿using System.Text.RegularExpressions;
+﻿using containers.Models;
+using containers.Lists;
+using System.Text.RegularExpressions;
+using Terminal.Gui;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using containers.Engines;
 
 namespace containers
 {
     class Program
     {
+
         static void Main(string[] args)
         {
-            //Console.WriteLine("Starting...");
-            //Console.WriteLine("Preloading Containers, Clients and Articles from .dat files...");
+            // Application.Init();
+
+            // var playerView = new AudioPlayerComponent()
+            // {
+            //     X = Pos.Center(),
+            //     Y = Pos.Center(),
+            //     Width = Dim.Fill() - 160,
+            //     Height = Dim.Fill() - 40,
+            // };
+
+            // Application.Top.Add(playerView);
+
+            // Application.Run();
+            Console.Clear();
             ContainerList containers = new ContainerList();
             PreloadContainers(containers);
             PreloadClients(containers);
             PreloadArticles(containers);
 
-            // Console.WriteLine("Printing Containers, Clients and Articles...");
-            // containers.ForEach((container) =>
-            // {
-            //     Console.WriteLine(">>>>#####<<<<");
-            //     container.Print();
-            //     container.Clients.ForEach((client) =>
-            //     {
-            //         client.Print();
-            //         client.Articles.ForEach((article) =>
-            //         {
-            //             article.Print();
-            //         });
-            //         Console.WriteLine("--------------------------------------------------");
-            //     });
-            //     Console.WriteLine("________________________________________________________");
-            // });
-            // Console.WriteLine("Done!");
+            Application.Init();
+            Colors.Base = Themes.BlueOnBlack();
+            var ui = new UI.UI(containers);
+            ui.Home();
+
+            Application.Run();
+            Application.Shutdown();
         }
 
         static void PreloadContainers(ContainerList containers)
         {
-            string containersPath = "ContainerRecords.dat";
+            string containersPath = "./Data/ContainerRecords.dat";
 
             foreach (string record in File.ReadAllLines(containersPath))
             {
@@ -48,7 +57,7 @@ namespace containers
                 try
                 {
                     string id = fields[0];
-                    ContainerType[] types = [];//int.Parse(fields[1]);
+                    ContainerType[] types = [ContainerType.FEU, ContainerType.FR];//int.Parse(fields[1]);
                     ContainerState state = ContainerState.EMPTY;//fields[2];
                     float weight = float.Parse(fields[3]);
                     float tare = float.Parse(fields[4]);
@@ -65,7 +74,7 @@ namespace containers
 
         static void PreloadClients(ContainerList containers)
         {
-            string clientsPath = "ClientRecords.dat";
+            string clientsPath = "./Data/ClientRecords.dat";
 
             foreach (string record in File.ReadAllLines(clientsPath))
             {
@@ -85,7 +94,7 @@ namespace containers
                     string address = fields[4];
                     string phone = fields[5];
 
-                    Client client = new Client(idClient, name, type, address, phone);
+                    Client client = new Client(idClient, name, type, address, phone, idContainer);
                     containers.Find(idContainer)?.Clients.Add(client);
                 }
                 catch (Exception ex)
@@ -97,7 +106,7 @@ namespace containers
 
         static void PreloadArticles(ContainerList containers)
         {
-            string articlesPath = "ArticleRecords.dat";
+            string articlesPath = "./Data/ArticleRecords.dat";
 
             foreach (string record in File.ReadAllLines(articlesPath))
             {
@@ -118,8 +127,8 @@ namespace containers
                     uint quantity = uint.Parse(fields[5]);
                     QuantityType type = QuantityType.BOX;//fields[6];
                     float unitPrice = float.Parse(fields[7]);
-
-                    Article article = new Article(idArticle, description, weight, UnitType.KG, quantity, type, unitPrice);
+                    
+                    Article article = new Article(idArticle, description, weight, UnitType.KG, quantity, type, unitPrice, idContainer, idClient);
                     containers.Find(idContainer)?.Clients.Find(idClient)?.Articles.Add(article);
                 }
                 catch (Exception ex)

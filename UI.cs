@@ -1,5 +1,0 @@
-namespace containers {
-    class UI {
-
-    }
-}
