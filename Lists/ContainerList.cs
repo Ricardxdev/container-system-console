@@ -8,15 +8,18 @@ namespace containers.Lists
     {
         public ContainerNode? Next { get; private set; }
         public ClientList Clients { get; private set; }
+        public ArticleList Articles { get; private set; }
 
         public ContainerNode(Container container) : base(container.ID, container.Types, container.State, container.Capacity, container.Tare)
         {
             Clients = new ClientList();
+            Articles = new ArticleList();
         }
 
         public ContainerNode(Container container, ClientList clients) : base(container.ID, container.Types, container.State, container.Capacity, container.Tare)
         {
             Clients = clients;
+            Articles = new ArticleList();
         }
 
         public void SetNext(ContainerNode? next)
@@ -33,14 +36,12 @@ namespace containers.Lists
     public class ContainerList
     {
         public ClientList Clients { get; private set; }
-        public ArticleList Articles { get; private set; }
         private ContainerNode? head;
         private ContainerNode? tail;
 
         public ContainerList()
         {
             Clients = new ClientList();
-            Articles = new ArticleList();
             head = null;
             tail = null;
         }
@@ -143,13 +144,13 @@ namespace containers.Lists
                 {
                     cl.Articles.ForEach(articles.Add);
                 });
+                c.Articles.ForEach(articles.Add);
             });
-            Articles.ForEach(articles.Add);
 
             return articles;
         }
 
-        public ClientList FilterClientsBy(Func<ContainerNode?, Client, bool> condition)
+        public ClientList FilterClientsBy(Func<ContainerNode?, ClientNode, bool> condition)
         {
             ClientList list = new ClientList();
             ForEach((c) =>
@@ -173,7 +174,7 @@ namespace containers.Lists
             return list;
         }
 
-        public ArticleList FilterArticlesBy(Func<ContainerNode?, Client?, Article, bool> condition)
+        public ArticleList FilterArticlesBy(Func<ContainerNode, ClientNode?, Article, bool> condition)
         {
             ArticleList list = new ArticleList();
             ForEach((c) =>
@@ -188,13 +189,13 @@ namespace containers.Lists
                         }
                     });
                 });
-            });
-            Articles.ForEach((art) =>
-            {
-                if (condition(null, null, art))
+                c.Articles.ForEach((art) =>
                 {
-                    list.Add(art);
-                }
+                    if (condition(c, null, art))
+                    {
+                        list.Add(art);
+                    }
+                });
             });
 
             return list;

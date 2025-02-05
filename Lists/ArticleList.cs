@@ -39,7 +39,7 @@ namespace containers.Lists
             }
             else
             {
-                tail.SetNext(newNode);
+                tail?.SetNext(newNode);
                 tail = newNode;
             }
         }

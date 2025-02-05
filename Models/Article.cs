@@ -31,10 +31,10 @@ namespace containers.Models
         public uint Quantity { get; private set; }
         public QuantityType QuantityType { get; private set; }
         public float UnitPrice { get; private set; }
-        public string? ContainerID;
+        public string ContainerID;
         public string? ClientID;
 
-        public Article(string id, string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice)
+        public Article(string id, string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice, string containerId)
         {
             ID = id;
             Description = description;
@@ -43,9 +43,10 @@ namespace containers.Models
             Quantity = quantity;
             QuantityType = quantityType;
             UnitPrice = unitPrice;
+            ContainerID = containerId;
         }
 
-        public Article(string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice)
+        public Article(string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice, string containerId)
         {
             ID = Helpers.Helpers.GenerateID();
             Description = description;
@@ -54,17 +55,18 @@ namespace containers.Models
             Quantity = quantity;
             QuantityType = quantityType;
             UnitPrice = unitPrice;
+            ContainerID = containerId;
         }
 
-        public Article(string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice, string? containerId, string? clientId)
-            : this(description, weight, unit, quantity, quantityType, unitPrice)
+        public Article(string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice, string containerId, string? clientId)
+            : this(description, weight, unit, quantity, quantityType, unitPrice, containerId)
         {
             ContainerID = containerId;
             ClientID = clientId;
         }
 
-        public Article(string id, string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice, string? containerId, string? clientId)
-            : this(id, description, weight, unit, quantity, quantityType, unitPrice)
+        public Article(string id, string description, float weight, UnitType unit, uint quantity, QuantityType quantityType, float unitPrice, string containerId, string? clientId)
+            : this(id, description, weight, unit, quantity, quantityType, unitPrice, containerId)
         {
             ContainerID = containerId;
             ClientID = clientId;
@@ -126,7 +128,7 @@ namespace containers.Models
         }
         public void ToRow(DataTable dataTable)
         {
-            dataTable.Rows.Add(ID, ContainerID, ClientID, Description, Quantity, QuantityType, Weight, Unit, UnitPrice, "  --> Sure? <--  ", "  --> Sure? <--  ");
+            dataTable.Rows.Add(ID, ContainerID, ClientID is null ? "  --> Asignar <--  " : ClientID, Description, Quantity, QuantityType, Weight, Unit, UnitPrice, "  --> Sure? <--  ", "  --> Sure? <--  ");
         }
     }
 }

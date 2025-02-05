@@ -1,10 +1,10 @@
-﻿using containers.Models;
+﻿using containers.Components;
+using containers.Models;
 using containers.Lists;
+using containers.Controllers;
+
 using System.Text.RegularExpressions;
 using Terminal.Gui;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using containers.Engines;
 
 namespace containers
 {
@@ -13,19 +13,6 @@ namespace containers
 
         static void Main(string[] args)
         {
-            // Application.Init();
-
-            // var playerView = new AudioPlayerComponent()
-            // {
-            //     X = Pos.Center(),
-            //     Y = Pos.Center(),
-            //     Width = Dim.Fill() - 160,
-            //     Height = Dim.Fill() - 40,
-            // };
-
-            // Application.Top.Add(playerView);
-
-            // Application.Run();
             Console.Clear();
             ContainerList containers = new ContainerList();
             PreloadContainers(containers);
@@ -34,11 +21,12 @@ namespace containers
 
             Application.Init();
             Colors.Base = Themes.BlueOnBlack();
-            var ui = new UI.UI(containers);
-            ui.Home();
+            var controller = new Controller(containers);
+            controller.Home();
 
             Application.Run();
             Application.Shutdown();
+            controller.player.Stop();
         }
 
         static void PreloadContainers(ContainerList containers)
